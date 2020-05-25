@@ -1,0 +1,8 @@
+web_management_homepage:
+  path:     /
+  defaults: { _controller: WebManagementBundle:Default:index }
+
+#EMPRESAS
+empresas:
+  resource: "@WebManagementBundle/Resources/config/routing_empresas.yml"
+  prefix:   '/empresas/'

@@ -1,0 +1,65 @@
+{% extends "base.html.twig" %}
+{% block body %}
+    <div class="container col-sm-8 border pt-sm-4">
+        <form id="notificationForm">
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('edit_notification') }}" />
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group border ">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" class="form-control" id="nombre" name="nombre" value="{{ empresa.nombre }}">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group border ">
+                    <label for="categoria">Categoría</label>
+                    <input type="text" class="form-control" id="categoria" name="categoria" value="{{ empresa.nombre }}">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group border ">
+                    <label for="provincia">Provincia</label>
+                    <select class="form-control" id="provincia" name="provincia">
+                        <option>To</option>
+                        <option>Al</option>
+                        <option>Ma</option>
+                        <option>4</option>
+                        <option>5</option>
+                    </select>
+                    <!--<input type="text" class="form-control" id="provincia" name="provincia" value="{{ empresa.provincia }}">-->
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group border">
+                    <label for="poblacion">Población</label>
+                    <input type="text" class="form-control" id="poblacion" name="poblacion" value="{{ empresa.poblacion }}">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group border">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" value="{{ empresa.email }}">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group border">
+                    <label for="prioridad">Prioridad</label>
+                    <input type="text" class="form-control" id="prioridad" name="prioridad" value="{{ empresa.prioridad }}">
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group border text-center">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                        Eliminar
+                    </button>
+                </div>
+            </div>
+
+        </div>
+        </form>
+    </div>
+    {% include "@WebManagement/Empresa/modalEliminar.html.twig" %}
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('js/empresas.js') }}"></script>
+{% endblock %}
