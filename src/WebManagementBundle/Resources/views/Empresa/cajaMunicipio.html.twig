@@ -1,0 +1,6 @@
+<select class="form-control" id="poblacion" name="poblacion">
+    {% for municipio in municipios %}
+        <option value="{{ municipio.id_municipio }}">{{ municipio.nombre }}</option>
+    {% endfor %}
+</select>
+{#<input type="text" class="form-control" id="poblacion" name="poblacion" value="">#}

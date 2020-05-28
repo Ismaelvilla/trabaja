@@ -50,9 +50,8 @@ class Empresa
     private $email = 'NULL';
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="categoria", type="string", length=255, nullable=false)
+     * @ORM\ManyToOne(targetEntity="Categoria")
+     * @ORM\JoinColumn(name="categoria_id", referencedColumnName="id")
      */
     private $categoria;
 
@@ -133,30 +132,6 @@ class Empresa
     public function getNombre()
     {
         return $this->nombre;
-    }
-
-    /**
-     * Set categoria
-     *
-     * @param string $categoria
-     *
-     * @return Empresa
-     */
-    public function setCategoria($categoria)
-    {
-        $this->categoria = $categoria;
-
-        return $this;
-    }
-
-    /**
-     * Get categoria
-     *
-     * @return string
-     */
-    public function getCategoria()
-    {
-        return $this->categoria;
     }
 
     /**
@@ -277,6 +252,30 @@ class Empresa
     public function getActivo()
     {
         return $this->activo;
+    }
+
+    /**
+     * Set categoria
+     *
+     * @param \WebManagementBundle\Entity\Categoria $categoria
+     *
+     * @return Empresa
+     */
+    public function setCategoria(\WebManagementBundle\Entity\Categoria $categoria = null)
+    {
+        $this->categoria = $categoria;
+
+        return $this;
+    }
+
+    /**
+     * Get categoria
+     *
+     * @return \WebManagementBundle\Entity\Categoria
+     */
+    public function getCategoria()
+    {
+        return $this->categoria;
     }
 
 

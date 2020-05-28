@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Municipios
  *
  * @ORM\Table(name="municipios")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="WebManagementBundle\Repository\MunicipiosRepository")
  */
 class Municipios
 {
@@ -49,6 +49,97 @@ class Municipios
      */
     private $nombre = '\'\'';
 
+    /**
+     * Get idMunicipio
+     *
+     * @return int
+     */
+    public function getid_municipio()
+    {
+        return $this->idMunicipio;
+    }
+
+    /**
+     * Get idProvincia
+     *
+     * @return int
+     */
+    public function getid_provincia()
+    {
+        return $this->idProvincia;
+    }
+
+    /**
+     * Get dc
+     *
+     * @return integer
+     */
+    public function getDc()
+    {
+        return $this->dc;
+    }
+
+    /**
+     * Set dc
+     *
+     * @param integer $dc
+     *
+     * @return Municipios
+     */
+    public function setDc($dc)
+    {
+        $this->dc = $dc;
+
+        return $this;
+    }
+
+    /**
+     * Set codMunicipio
+     *
+     * @param string $codMunicipio
+     *
+     * @return Municipios
+     */
+    public function setcodMunicipio($codMunicipio)
+    {
+        $this->codMunicipio = $codMunicipio;
+
+        return $this;
+    }
+
+    /**
+     * Get codMunicipio
+     *
+     * @return string
+     */
+    public function getcodMunicipio()
+    {
+        return $this->codMunicipio;
+    }
+
+    /**
+     * Set nombre
+     *
+     * @param string $nombre
+     *
+     * @return Municipios
+     */
+    public function setNombre($nombre)
+    {
+        $this->nombre = $nombre;
+
+        return $this;
+    }
+
+    /**
+     * Get nombre
+     *
+     * @return string
+     */
+    public function getNombre()
+    {
+        return $this->nombre;
+    }
 
 }
 

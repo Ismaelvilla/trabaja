@@ -23,4 +23,24 @@ $(document).ready(function(){
         });
     });
 
+    $('#provincia').on('change',function(){
+        console.log('SE ha mdoficiado la provincia '+this.value);
+        var json = {
+            'idProvincia':this.value
+        }
+        $.ajax({
+            url: '/empresas/provincia-ajax',
+            type: 'GET',
+            data: json,
+            success: function(respuesta){
+                console.log('terminamos con provincia: '+respuesta);
+                $("#cajaMunicipio").html('');
+                $("#cajaMunicipio").html(respuesta);
+            },
+            error : function(xhr, status) {
+                alert('Disculpe, existió un problema: '+xhr);
+            }
+        });
+    });
+
 });

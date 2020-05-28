@@ -43,10 +43,20 @@ class EmpresaController extends Controller
         $empresa = $repositoryEmpresa->find($idEmpresa);
 
         //vamos a sacar las provincias
+        $repositoryProvincia = $entityManager->getRepository('WebManagementBundle:Provincias');
+        $provincias = $repositoryProvincia->findAll();
 
+        //vamos a sacar los municipios
+        $repositoryMunicipio = $entityManager->getRepository('WebManagementBundle:Municipios');
+        $municipios = $repositoryMunicipio->findAll();
 
         echo "el id de empresa es: ".$idEmpresa;
-        return $this->render('WebManagementBundle:Empresa:details.html.twig', array('empresa' => $empresa));
+        return $this->render('WebManagementBundle:Empresa:details.html.twig',
+            array(
+                'empresa' => $empresa,
+                'provincias' => $provincias,
+                'municipios' => $municipios
+            ));
         //return new Response('estamos en details');
     }
 
@@ -97,5 +107,38 @@ class EmpresaController extends Controller
         );
         return new JsonResponse($json);
 
+    }
+
+    public function provinciaAjaxAction(Request $request){
+        $idProvincia = $request->query->get('idProvincia');
+
+        //vamos a sacar todos los municipios que tiene esta provincia
+        $entityManager = $this->getDoctrine()->getManager();
+        //vamos a sacar los municipios
+        $repositoryMunicipio = $entityManager->getRepository('WebManagementBundle:Municipios');
+        $municipios = $repositoryMunicipio->getMunicipiosProvincia($entityManager, $idProvincia);
+
+       /* $json = array(
+            'respuesta' => $idProvincia
+        );
+        return new JsonResponse($json);*/
+        $response = $this->render('WebManagementBundle:Empresa:cajaMunicipio.html.twig', array(
+            'municipios' => $municipios
+        ));
+
+        return $response;
+        /*return $this->render('WebManagementBundle:Empresa:cajaMunicipio.html.twig',
+            array(
+                  'municipios' => $municipios
+            ));*/
+    }
+
+    public function pruebasAction(){
+        //vamos a probar los municipios
+        $entityManager = $this->getDoctrine()->getManager();
+        $repositoryMunicipios = $entityManager->getRepository('WebManagementBundle:Municipios');
+        $municipios = $repositoryMunicipios->getMunicipiosProvincia($entityManager,6);
+
+        return $this->render('WebManagementBundle:Empresa:pruebas.html.twig', array('municipios'=>$municipios));
     }
 }

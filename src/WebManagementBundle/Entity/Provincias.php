@@ -4,11 +4,12 @@ namespace WebManagementBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+
 /**
  * Provincias
  *
  * @ORM\Table(name="provincias")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="WebManagementBundle\Repository\ProvinciasRepository")
  */
 class Provincias
 {
@@ -27,6 +28,40 @@ class Provincias
      * @ORM\Column(name="provincia", type="string", length=30, nullable=true)
      */
     private $provincia = 'NULL';
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getid_provincia()
+    {
+        return $this->idProvincia;
+    }
+
+    /**
+     * Set provincia
+     *
+     * @param string $provincia
+     *
+     * @return Provincias
+     */
+    public function setProvincia($provincia)
+    {
+        $this->provincia = $provincia;
+
+        return $this;
+    }
+
+    /**
+     * Get provincia
+     *
+     * @return string
+     */
+    public function getProvincia()
+    {
+        return $this->provincia;
+    }
 
 
 }

@@ -6,3 +6,11 @@ web_management_homepage:
 empresas:
   resource: "@WebManagementBundle/Resources/config/routing_empresas.yml"
   prefix:   '/empresas/'
+
+#CATEGORIAS
+categorias:
+  resource: "@WebManagementBundle/Resources/config/routing_categorias.yml"
+  prefix:   '/categorias/'
+
+
+

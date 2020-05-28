@@ -22,3 +22,14 @@ empresas_delete:
   path:     '/details/{id}'
   methods:  [DELETE]
   defaults: { _controller: WebManagementBundle:Empresa:delete }
+
+empresas_provincias_ajax:
+  path:     '/provincia-ajax'
+  methods:  [GET]
+  defaults: { _controller: WebManagementBundle:Empresa:provinciaAjax }
+
+empresas_pruebas:
+  path:     '/pruebas'
+  methods:  [GET]
+  defaults: { _controller: WebManagementBundle:Empresa:pruebas }
+

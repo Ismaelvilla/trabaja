@@ -1,0 +1,27 @@
+{% extends "base.html.twig" %}
+{% block body %}
+    <div class="container col-sm-8 border pt-sm-4">
+        <form id="categoriaForm">
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('edit_categoria') }}" />
+            <input type="hidden" name="idCategoria" value="{{ categoria.id }}" />
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group border ">
+                        <label for="nombre">Nombre</label>
+                        <input required type="text" class="form-control" id="nombre" name="nombre" value="{{ categoria.nombre }}">
+                        <span id="mensajeVacio"></span>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="form-group border ">
+                        <button type="submit" id="btnEnviar" class="btn btn-primary">Enviar</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('js/categorias.js') }}"></script>
+{% endblock %}
