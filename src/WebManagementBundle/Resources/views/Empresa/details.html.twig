@@ -21,19 +21,26 @@
                     <label for="categoria">Categoría</label>
                     <select class="form-control" id="categoria" name="categoria">
                         {% for categoria in categorias %}
-                            <option value="{{ categoria.id }}">{{categoria.nombre }}</option>
+                            {% if categoria.id == empresa.categoria.id %}
+                                <option selected value="{{ categoria.id }}">{{categoria.nombre }}</option>
+                            {% else %}
+                                <option value="{{ categoria.id }}">{{categoria.nombre }}</option>
+                            {% endif %}
                         {% endfor %}
                     </select>
-                    <!--<input required type="text" class="form-control" id="categoria" name="categoria" value="{{ empresa.nombre }}">-->
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="form-group border ">
                     <label for="provincia">Provincia</label>
                     <select class="form-control" id="provincia" name="provincia">
-                        {% for provincia in provincias %}
-                            <option value="{{ provincia.id_provincia }}">{{ provincia.provincia }}</option>
-                        {% endfor %}
+                       {% for provincia in provincias %}
+                           {% if provincia.IdProvincia == empresa.provincia.IdProvincia %}
+                               <option selected value="{{ provincia.IdProvincia }}">{{ provincia.provincia }}</option>
+                           {% else %}
+                               <option value="{{ provincia.IdProvincia }}">{{ provincia.provincia }}</option>
+                           {% endif %}
+                      {% endfor %}
                     </select>
                 </div>
             </div>
@@ -59,7 +66,6 @@
                             <option value="{{ i }}">{{ i }}</option>
                         {%  endfor %}
                     </select>
-                   <!-- <input type="text" class="form-control" id="prioridad" name="prioridad" value="{{ empresa.prioridad }}">-->
                 </div>
             </div>
             <div class="col-sm-12">

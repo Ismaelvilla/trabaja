@@ -19,7 +19,10 @@ class EmpresaController extends Controller
         //vamos a recoger las empresas y las vamos a mostrar
         $entityManager = $this->getDoctrine()->getManager();
         $repositoryEmpresa = $entityManager->getRepository('WebManagementBundle:Empresa');
-        $empresas = $repositoryEmpresa->findAll();
+        $empresas = $repositoryEmpresa->findBy(
+            ['activo' => true],
+            ['nombre' => 'asc']
+        );
 
         return $this->render('WebManagementBundle:Empresa:index.html.twig', array('empresas'=>$empresas));
     }
@@ -48,13 +51,12 @@ class EmpresaController extends Controller
 
         //vamos a sacar los municipios
         $repositoryMunicipio = $entityManager->getRepository('WebManagementBundle:Municipios');
-        $municipios = $repositoryMunicipio->findAll();
+        $municipios = $repositoryMunicipio->getMunicipiosProvincia($entityManager, $empresa->getProvincia()->getIdProvincia());
 
         //vamos a sacar las categorias
         $repositoryCategoria = $entityManager->getRepository('WebManagementBundle:Categoria');
         $categorias = $repositoryCategoria->findAll();
 
-        echo "el id de empresa es: ".$idEmpresa;
         return $this->render('WebManagementBundle:Empresa:details.html.twig',
             array(
                 'empresa' => $empresa,
@@ -93,33 +95,38 @@ class EmpresaController extends Controller
         $entityManager = $this->getDoctrine()->getManager();
         $repositoryEmpresa = $entityManager->getRepository('WebManagementBundle:Empresa');
         $empresa = $repositoryEmpresa->find($data['id']);
-        $empresas = $repositoryEmpresa->findAll();
 
         //buscamos la categoria
         $repositoryCategoria = $entityManager->getRepository('WebManagementBundle:Categoria');
         $categoria = $repositoryCategoria->find($data['categoria']);
 
+        //buscamos la provincia
+        $repositoryProvincia = $entityManager->getRepository('WebManagementBundle:Provincias');
+        $provincia = $repositoryProvincia->find($data['provincia']);
+
+        //buscamos la población
+        $repositoryPoblacion = $entityManager->getRepository('WebManagementBundle:Municipios');
+        $poblacion = $repositoryPoblacion->find($data['poblacion']);
+
         if ($this->isCsrfTokenValid('edit_notification', $csr_token)) {
 
             $empresa->setNombre($data['nombre']);
             $empresa->setCategoria($categoria);
-            $empresa->setProvincia($data['provincia']);
-            $empresa->setPoblacion($data['poblacion']);
+            $empresa->setProvincia($provincia);
+            $empresa->setPoblacion($poblacion);
             $empresa->setEmail($data['email']);
             $empresa->setPrioridad($data['prioridad']);
+            $empresa->setActivo(true);
             $entityManager->flush();
         }
 
-        return $this->render('WebManagementBundle:Empresa:index.html.twig', array('empresas'=>$empresas));
-
-
-       /* echo "hasta qui ".$data['categoria'];
-        die();*/
-      /*  $json = array(
-           // 'redirect'=>$this->generateUrl('empresas_index')
-            'redirect' => 'termino'
+        //Mandamos todas las empresas activas
+        $empresas = $repositoryEmpresa->findBy(
+            ['activo' => true],
+            ['nombre' => 'asc']
         );
-        return new JsonResponse($json);*/
+
+        return $this->render('WebManagementBundle:Empresa:index.html.twig', array('empresas'=>$empresas));
 
     }
 

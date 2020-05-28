@@ -3,7 +3,6 @@
 namespace WebManagementBundle\Repository;
 
 use WebManagementBundle\Entity\Empresa;
-use WebManagementBundle\Entity\Categoria;
 
 /**
  * EmpresaRepository
@@ -22,10 +21,8 @@ class EmpresaRepository extends \Doctrine\ORM\EntityRepository
 
         $empresa = new Empresa();
         $empresa->setNombre('');
-        $empresa->setProvincia('');
-        $empresa->setPoblacion('');
         $empresa->setEmail('');
-        $empresa->setActivo(true);
+        $empresa->setActivo(false);
         $empresa->setPrioridad(1);
         $empresa->setFecha(new \DateTime);
 

@@ -20,16 +20,5 @@ class MunicipiosRepository extends \Doctrine\ORM\EntityRepository
             ->setParameter('1', $idProvincia);
 
         return $qb->getQuery()->getResult();
-        /*$p1='3a';
-        $qb = $entity->createQueryBuilder();
-        $qb->select('n')
-            ->from(CodigoQR::class,'n')
-            ->where($qb->expr()->eq('n.code','?1'))
-            ->andWhere($qb->expr()->eq('n.solicitanteId','?2'))
-            ->setParameter('1',$p1)
-            ->setParameter('2','1')
-            ->orderBy('n.solicitanteId','ASC');
-
-        return $qb->getQuery()->getResult();*/
     }
 }
