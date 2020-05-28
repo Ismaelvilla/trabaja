@@ -50,12 +50,17 @@ class EmpresaController extends Controller
         $repositoryMunicipio = $entityManager->getRepository('WebManagementBundle:Municipios');
         $municipios = $repositoryMunicipio->findAll();
 
+        //vamos a sacar las categorias
+        $repositoryCategoria = $entityManager->getRepository('WebManagementBundle:Categoria');
+        $categorias = $repositoryCategoria->findAll();
+
         echo "el id de empresa es: ".$idEmpresa;
         return $this->render('WebManagementBundle:Empresa:details.html.twig',
             array(
                 'empresa' => $empresa,
                 'provincias' => $provincias,
-                'municipios' => $municipios
+                'municipios' => $municipios,
+                'categorias' => $categorias
             ));
         //return new Response('estamos en details');
     }
@@ -80,19 +85,24 @@ class EmpresaController extends Controller
     }
 
     public function updateAction(Request $request){
-        //conseguimos el id de empresa
-        $idEmpresa = $request->attributes->get('id');
+
         $csr_token = $request->request->get('_csrf_token');
         $data = $request->request->all();
 
         //buscamos la empresa
         $entityManager = $this->getDoctrine()->getManager();
         $repositoryEmpresa = $entityManager->getRepository('WebManagementBundle:Empresa');
-        $empresa = $repositoryEmpresa->find($idEmpresa);
+        $empresa = $repositoryEmpresa->find($data['id']);
+        $empresas = $repositoryEmpresa->findAll();
+
+        //buscamos la categoria
+        $repositoryCategoria = $entityManager->getRepository('WebManagementBundle:Categoria');
+        $categoria = $repositoryCategoria->find($data['categoria']);
 
         if ($this->isCsrfTokenValid('edit_notification', $csr_token)) {
+
             $empresa->setNombre($data['nombre']);
-            $empresa->setCategoria($data['categoria']);
+            $empresa->setCategoria($categoria);
             $empresa->setProvincia($data['provincia']);
             $empresa->setPoblacion($data['poblacion']);
             $empresa->setEmail($data['email']);
@@ -100,12 +110,16 @@ class EmpresaController extends Controller
             $entityManager->flush();
         }
 
+        return $this->render('WebManagementBundle:Empresa:index.html.twig', array('empresas'=>$empresas));
 
-        $json = array(
+
+       /* echo "hasta qui ".$data['categoria'];
+        die();*/
+      /*  $json = array(
            // 'redirect'=>$this->generateUrl('empresas_index')
             'redirect' => 'termino'
         );
-        return new JsonResponse($json);
+        return new JsonResponse($json);*/
 
     }
 

@@ -11,7 +11,7 @@ $(document).ready(function(){
         });
     });
 
-    $('#notificationForm').on('change',function(){
+   /* $('#notificationForm').on('change',function(){
         console.log('se modificaa'+$(this).serialize());
         $.ajax({
            type: 'POST',
@@ -21,7 +21,7 @@ $(document).ready(function(){
                console.log('hemos terminado: '+respuesta.redirect);
            }
         });
-    });
+    });*/
 
     $('#provincia').on('change',function(){
         console.log('SE ha mdoficiado la provincia '+this.value);

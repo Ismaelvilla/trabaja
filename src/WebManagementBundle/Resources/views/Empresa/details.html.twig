@@ -1,19 +1,30 @@
 {% extends "base.html.twig" %}
 {% block body %}
+    <div class="container pt-sm-4 text-center col-sm-8 border">
+        <div class="row text-center border">
+            Por favor rellene el formulario
+        </div>
+    </div>
     <div class="container col-sm-8 border pt-sm-4">
-        <form id="notificationForm">
+        <form id="notificationForm" method="post" action="update">
         <input type="hidden" name="_csrf_token" value="{{ csrf_token('edit_notification') }}" />
+        <input type="hidden" name="id" value="{{ empresa.id }}" />
         <div class="row">
             <div class="col-sm-6">
                 <div class="form-group border ">
                     <label for="nombre">Nombre</label>
-                    <input type="text" class="form-control" id="nombre" name="nombre" value="{{ empresa.nombre }}">
+                    <input required type="text" class="form-control" id="nombre" name="nombre" value="{{ empresa.nombre }}">
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="form-group border ">
                     <label for="categoria">Categoría</label>
-                    <input type="text" class="form-control" id="categoria" name="categoria" value="{{ empresa.nombre }}">
+                    <select class="form-control" id="categoria" name="categoria">
+                        {% for categoria in categorias %}
+                            <option value="{{ categoria.id }}">{{categoria.nombre }}</option>
+                        {% endfor %}
+                    </select>
+                    <!--<input required type="text" class="form-control" id="categoria" name="categoria" value="{{ empresa.nombre }}">-->
                 </div>
             </div>
             <div class="col-sm-6">
@@ -24,7 +35,6 @@
                             <option value="{{ provincia.id_provincia }}">{{ provincia.provincia }}</option>
                         {% endfor %}
                     </select>
-                    <!--<input type="text" class="form-control" id="provincia" name="provincia" value="{{ empresa.provincia }}">-->
                 </div>
             </div>
             <div class="col-sm-6">
@@ -32,24 +42,31 @@
                     <label for="poblacion">Población</label>
                     <span id="cajaMunicipio">
                         {% include "@WebManagement/Empresa/cajaMunicipio.html.twig" %}
-                        <!--<input type="text" class="form-control" id="poblacion" name="poblacion" value="{{ empresa.poblacion }}">-->
                     </span>
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="form-group border">
                     <label for="email">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" value="{{ empresa.email }}">
+                    <input required type="email" class="form-control" id="email" name="email" value="{{ empresa.email }}">
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="form-group border">
                     <label for="prioridad">Prioridad</label>
-                    <input type="text" class="form-control" id="prioridad" name="prioridad" value="{{ empresa.prioridad }}">
+                    <select class="form-control" id="prioridad" name="prioridad">
+                        {% for i in 1..10 %}
+                            <option value="{{ i }}">{{ i }}</option>
+                        {%  endfor %}
+                    </select>
+                   <!-- <input type="text" class="form-control" id="prioridad" name="prioridad" value="{{ empresa.prioridad }}">-->
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group border text-center">
+                    <button type="submit" class="btn btn-primary">
+                        Aceptar
+                    </button>
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                         Eliminar
                     </button>
