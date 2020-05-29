@@ -75,6 +75,20 @@ class Empresa
     private $fecha;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="comentario", type="text", nullable=true)
+     */
+    private $comentario;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="user", type="string", length=255, nullable=false)
+     */
+    private $usuario;
+
+    /**
      * Get id
      *
      * @return int

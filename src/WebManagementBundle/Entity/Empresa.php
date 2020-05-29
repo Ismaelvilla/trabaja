@@ -75,6 +75,20 @@ class Empresa
     private $fecha;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="comentario", type="text", nullable=true)
+     */
+    private $comentario;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="user", type="string", length=255, nullable=false)
+     */
+    private $usuario;
+
+    /**
      * Get id
      *
      * @return int
@@ -274,5 +288,53 @@ class Empresa
     public function getPoblacion()
     {
         return $this->poblacion;
+    }
+
+    /**
+     * Set comentario
+     *
+     * @param string $comentario
+     *
+     * @return Empresa
+     */
+    public function setComentario($comentario)
+    {
+        $this->comentario = $comentario;
+
+        return $this;
+    }
+
+    /**
+     * Get comentario
+     *
+     * @return string
+     */
+    public function getComentario()
+    {
+        return $this->comentario;
+    }
+
+    /**
+     * Set usuario
+     *
+     * @param string $usuario
+     *
+     * @return Empresa
+     */
+    public function setUsuario($usuario)
+    {
+        $this->usuario = $usuario;
+
+        return $this;
+    }
+
+    /**
+     * Get usuario
+     *
+     * @return string
+     */
+    public function getUsuario()
+    {
+        return $this->usuario;
     }
 }

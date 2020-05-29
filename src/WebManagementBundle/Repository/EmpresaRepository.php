@@ -3,6 +3,7 @@
 namespace WebManagementBundle\Repository;
 
 use WebManagementBundle\Entity\Empresa;
+use WebManagementBundle\Entity\Provincias;
 
 /**
  * EmpresaRepository
@@ -17,14 +18,19 @@ class EmpresaRepository extends \Doctrine\ORM\EntityRepository
      * @param $entityManager
      * @return int
      */
-    public function add($entityManager){
+    public function add($entityManager, $categoria, $provincia, $municipio){
+
 
         $empresa = new Empresa();
         $empresa->setNombre('');
+        $empresa->setCategoria($categoria);
+        $empresa->setProvincia($provincia);
+        $empresa->setPoblacion($municipio);
         $empresa->setEmail('');
         $empresa->setActivo(false);
         $empresa->setPrioridad(1);
         $empresa->setFecha(new \DateTime);
+        $empresa->setUsuario('ismael');
 
         $entityManager->persist($empresa);
         $entityManager->flush();

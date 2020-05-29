@@ -28,10 +28,24 @@ class EmpresaController extends Controller
     }
 
     public function addAction(){
-        //vamos a crear una empresa vacia
+        //sacamos el entity
         $entityManager = $this->getDoctrine()->getManager();
+
+        //vamos a sacar la categoria
+        $repositoryCategoria = $entityManager->getRepository('WebManagementBundle:Categoria');
+        $categoria = $repositoryCategoria->find(8);
+
+        //Vamos a sacar la provincia base
+        $repositoryProvincia = $entityManager->getRepository('WebManagementBundle:Provincias');
+        $provincia = $repositoryProvincia->find(53);
+
+        //Vamos a sacar el municipio base
+        $repositoryPoblacion = $entityManager->getRepository('WebManagementBundle:Municipios');
+        $municipio = $repositoryPoblacion->find(8117);
+
+        //vamos a crear una empresa vacia
         $repositoryEmpresa = $entityManager->getRepository('WebManagementBundle:Empresa');
-        $idEmpresa= $repositoryEmpresa->add($entityManager);
+        $idEmpresa= $repositoryEmpresa->add($entityManager, $categoria, $provincia, $municipio);
 
         return $this->redirectToRoute('empresas_edit', array('id'=>$idEmpresa));
     }
@@ -117,6 +131,8 @@ class EmpresaController extends Controller
             $empresa->setEmail($data['email']);
             $empresa->setPrioridad($data['prioridad']);
             $empresa->setActivo(true);
+            if($data['comentarios']) $empresa->setComentario($data['comentarios']);
+
             $entityManager->flush();
         }
 
