@@ -12,6 +12,7 @@ parameters:
 framework:
     #esi: ~
     #translator: { fallbacks: ['%locale%'] }
+    translator: ~
     secret: '%secret%'
     router:
         resource: '%kernel.project_dir%/app/config/routing.yml'
@@ -72,3 +73,11 @@ swiftmailer:
 sensio_framework_extra:
    router:
         annotations: false
+
+fos_user:
+    db_driver: orm # other valid values are 'mongodb' and 'couchdb'
+    firewall_name: main
+    user_class: WebManagementBundle\Entity\User
+    from_email:
+        address: "ivm__13@hotmail.com"
+        sender_name: "ivm__13@hotmail.com"
