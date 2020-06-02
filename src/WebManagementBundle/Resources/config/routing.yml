@@ -1,6 +1,10 @@
-web_management_homepage:
+web_management_login:
   path:     /
   defaults: { _controller: WebManagementBundle:Default:index }
+
+web_management_home:
+  path:     /home
+  defaults: { _controller: WebManagementBundle:Default:home }
 
 #EMPRESAS
 empresas:

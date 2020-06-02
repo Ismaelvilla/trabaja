@@ -16,11 +16,11 @@
                                 <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
                             {% endif %}
                             <div class="form-label-group">
-                                <input type="text" id="username" name="_username" value="{{ last_username }}" class="form-control" placeholder="Email address" required autofocus>
-                                <label for="inputEmail">{{ 'security.login.username'|trans }}</label>
+                                <input type="text" id="username" name="_username" value="{{ last_username }}" class="form-control" placeholder="{{ 'security.login.username'|trans }}" required autofocus>
+                                <label for="username">{{ 'security.login.username'|trans }}</label>
                             </div>
                             <div class="form-label-group">
-                                <input type="password" id="password" name="_password" class="form-control" placeholder="Password" required>
+                                <input type="password" id="password" name="_password" class="form-control" placeholder="{{ 'security.login.password'|trans }}" required>
                                 <label for="password">{{ 'security.login.password'|trans }}</label>
                             </div>
 

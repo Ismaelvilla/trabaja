@@ -12,10 +12,12 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        //echo "funciona";
-       // die();
+        return $this->redirectToRoute("fos_user_security_login");
+    }
+
+    public function homeAction()
+    {
         return $this->render('WebManagementBundle:Default:index.html.twig');
-        //return $this->redirectToRoute("fos_user_security_login");
     }
 
 }

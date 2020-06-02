@@ -11,18 +11,28 @@
     </head>
     <body class="bg-light">
         {% block menu %}
-            <div class="nav-scroller bg-white shadow-sm">
-                <nav class="nav nav-underline">
+            <div class="nav-scroller bg-white shadow-sm border">
+                <nav class="nav nav-underline border">
                     <a class="nav-link active" href="#">Inicio</a>
                     <a class="nav-link" href="{{ path('categorias_index') }}">Categorías</a>
                     <a class="nav-link" href="{{ path('empresas_index') }}">Empresas</a>
+                    <div class="dropdown border  mr-auto">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuButton" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {% if app.user %}
+                                {{ app.user.username }}
+                            {% endif %}
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="{{ path('fos_user_security_logout') }}">Salir</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </div>
+
                 </nav>
             </div>
         {% endblock %}
         <main role="main" class="container">
-            {% if app.user %}
-                {{ app.user.username }}
-            {% endif %}
             {% block body %}{% endblock %}
         </main>
         <!--<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>-->
