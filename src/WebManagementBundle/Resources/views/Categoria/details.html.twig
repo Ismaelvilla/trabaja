@@ -11,10 +11,27 @@
                         <input required type="text" class="form-control" id="nombre" name="nombre" value="{{ categoria.nombre }}">
                         <span id="mensajeVacio"></span>
                     </div>
+                    <div class="form-group custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input form-control" name="activo" id="activo" {% if categoria.activo %} checked {% endif %}>
+                        <label class="custom-control-label" for="activo">
+                            <div id="etiquetaEstado">
+                                {% if categoria.activo %}<span class="badge badge-pill badge-success">Activado</span>
+                                {% else %}<span class="badge badge-pill badge-danger">Desactivado</span>
+                                {% endif %}
+                            </div>
+                        </label>
+                    </div>
                 </div>
-                <div class="col-sm-12">
-                    <div class="form-group border ">
-                        <button type="submit" id="btnEnviar" class="btn btn-primary">Enviar</button>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 ocultar" id="cajaActivada">
+                    <div class="alert alert-success" role="alert">
+                        <h4 class="alert-heading">Categoria activada!</h4>
+                    </div>
+                </div>
+                <div class="col-sm-12 ocultar" id="cajaDesactivada">
+                    <div class="alert alert-danger" role="alert">
+                        <h4 class="alert-heading">Categoria desactivada!</h4>
                     </div>
                 </div>
             </div>

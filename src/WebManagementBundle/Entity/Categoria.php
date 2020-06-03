@@ -42,6 +42,13 @@ class Categoria
      */
     private $activo;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="user", type="string", length=255, nullable=false)
+     */
+    private $usuario;
+
 
     /**
      * Get id
@@ -123,5 +130,29 @@ class Categoria
     public function getActivo()
     {
         return $this->activo;
+    }
+
+    /**
+     * Set usuario
+     *
+     * @param string $usuario
+     *
+     * @return Categoria
+     */
+    public function setUsuario($usuario)
+    {
+        $this->usuario = $usuario;
+
+        return $this;
+    }
+
+    /**
+     * Get usuario
+     *
+     * @return string
+     */
+    public function getUsuario()
+    {
+        return $this->usuario;
     }
 }

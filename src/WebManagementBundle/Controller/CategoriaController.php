@@ -71,6 +71,11 @@ class CategoriaController extends Controller
 
             //actualizamos los valores
             $categoria->setNombre($data['nombre']);
+            if(isset($data['activo'])){
+                $categoria->setActivo(true);
+            }else{
+                $categoria->setActivo(false);
+            }
             $entityManager->flush();
         }
 

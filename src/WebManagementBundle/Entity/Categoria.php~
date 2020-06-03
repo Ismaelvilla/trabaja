@@ -42,6 +42,13 @@ class Categoria
      */
     private $activo;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="user", type="string", length=255, nullable=false)
+     */
+    private $usuario;
+
 
     /**
      * Get id

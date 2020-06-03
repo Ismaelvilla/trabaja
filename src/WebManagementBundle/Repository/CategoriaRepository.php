@@ -22,6 +22,7 @@ class CategoriaRepository extends \Doctrine\ORM\EntityRepository
         $categoria->setNombre("");
         $categoria->setFecha(new \DateTime);
         $categoria->setActivo(false);
+        $categoria->setUsuario("aa");
 
         $entity->persist($categoria);
         $entity->flush();
