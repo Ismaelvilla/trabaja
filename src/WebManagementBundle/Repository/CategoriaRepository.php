@@ -17,12 +17,12 @@ class CategoriaRepository extends \Doctrine\ORM\EntityRepository
      * @param $entity
      * @return int
      */
-    public function add($entity){
+    public function add($entity, $idUsuario){
         $categoria = new Categoria();
         $categoria->setNombre("");
         $categoria->setFecha(new \DateTime);
         $categoria->setActivo(false);
-        $categoria->setUsuario("aa");
+        $categoria->setUsuario($idUsuario);
 
         $entity->persist($categoria);
         $entity->flush();

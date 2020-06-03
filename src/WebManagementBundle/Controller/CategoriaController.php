@@ -17,10 +17,13 @@ class CategoriaController extends Controller
      */
     public function indexAction()
     {
+        //Obtenemos el objeto usuario
+        $usuario = $this->getUser();
+
         //vamos a recoger las categorias y las vamos a mostrar
         $entityManager = $this->getDoctrine()->getManager();
         $repositoryCategoria = $entityManager->getRepository('WebManagementBundle:Categoria');
-        $categorias = $repositoryCategoria->findAll();
+        $categorias = $repositoryCategoria->findBy(['activo'=>1, 'usuario'=>$usuario->getId()]);
 
         return $this->render('WebManagementBundle:Categoria:index.html.twig', array(
             'categorias' => $categorias
@@ -28,11 +31,13 @@ class CategoriaController extends Controller
     }
 
     public function addAction(){
+        //Obtenemos el usuario
+        $usuario = $this->getUser();
 
         //vamos a crear una categoria vacia
         $entityManager = $this->getDoctrine()->getManager();
         $repositoryCategoria = $entityManager->getRepository('WebManagementBundle:Categoria');
-        $idCategoria = $repositoryCategoria->add($entityManager);
+        $idCategoria = $repositoryCategoria->add($entityManager, $usuario->getId());
 
         return $this->redirectToRoute('categorias_details', array(
             'id'=>$idCategoria
