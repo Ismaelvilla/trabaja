@@ -23,7 +23,10 @@ class CategoriaController extends Controller
         //vamos a recoger las categorias y las vamos a mostrar
         $entityManager = $this->getDoctrine()->getManager();
         $repositoryCategoria = $entityManager->getRepository('WebManagementBundle:Categoria');
-        $categorias = $repositoryCategoria->findBy(['activo'=>1, 'usuario'=>$usuario->getId()]);
+        $categorias = $repositoryCategoria->findBy(
+            ['activo'=>1, 'usuario'=>$usuario->getId()],
+            ['id'=>'ASC']
+        );
 
         return $this->render('WebManagementBundle:Categoria:index.html.twig', array(
             'categorias' => $categorias

@@ -1,12 +1,23 @@
 {% extends "base.html.twig" %}
 {% block body %}
-    <div class="container col-sm-8 border pt-sm-4">
+    <!-- Breadcrumbs de añadir/editar categoria -->
+    <div class="d-flex align-items-center p-3 my-3 bg-purple rounded shadow-sm">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb my-2">
+                <li class="breadcrumb-item"><a href="{{ path('web_management_home') }}">Home</a></li>
+                <li class="breadcrumb-item"><a href="{{ path('categorias_index') }}">Categorías</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{% if categoria.nombre %}{{ categoria.nombre }}{% else %}Añadir Categoría{% endif %}</li>
+            </ol>
+        </nav>
+    </div>
+
+    <div class="container col-sm-8 pt-sm-4  bg-white rounded shadow-sm">
         <form id="categoriaForm">
             <input type="hidden" name="_csrf_token" value="{{ csrf_token('edit_categoria') }}" />
             <input type="hidden" name="idCategoria" value="{{ categoria.id }}" />
             <div class="row">
                 <div class="col-sm-12">
-                    <div class="form-group border ">
+                    <div class="form-group">
                         <label for="nombre">Nombre</label>
                         <input required type="text" class="form-control" id="nombre" name="nombre" value="{{ categoria.nombre }}">
                         <span id="mensajeVacio"></span>

@@ -21,12 +21,16 @@ $(document).ready(function(){
        $('#cajaActivada').hide();
        $('#cajaDesactivada').hide();
 
-       if( $('#activo').is(':checked') ) {
-           $('#etiquetaEstado').html('<span class="badge badge-pill badge-success">Activado</span>');
-           $('#cajaActivada').show();
+       if($('#nombre').val()){
+           if( $('#activo').is(':checked') ) {
+               $('#etiquetaEstado').html('<span class="badge badge-pill badge-success">Activado</span>');
+               $('#cajaActivada').show();
+           }else{
+               $('#etiquetaEstado').html('<span class="badge badge-pill badge-danger">Desactivado</span>');
+               $('#cajaDesactivada').show();
+           }
        }else{
-           $('#etiquetaEstado').html('<span class="badge badge-pill badge-danger">Desactivado</span>');
-           $('#cajaDesactivada').show();
+           $('#activo').prop('checked', false);
        }
    })
 
