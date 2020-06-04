@@ -26,7 +26,7 @@
             </thead>
             <tbody>
                 {% for categoria in categorias %}
-                    <tr>
+                    <tr {% if categoria.activo %}class="text-success"{% else %}class="text-danger"{% endif %}>
                         <td>{{ categoria.id }}</td>
                         <td>{{ categoria.nombre }}</td>
                         <td>{{ categoria.fecha|date('d/m/Y H:i') }}</td>

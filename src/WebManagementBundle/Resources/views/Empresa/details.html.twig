@@ -21,7 +21,7 @@
     <div class="container col-12 col-sm-8 pt-sm-4">
         <form id="notificationForm" method="post" action="update">
         <input type="hidden" name="_csrf_token" value="{{ csrf_token('edit_notification') }}" />
-        <input type="hidden" name="id" value="{{ empresa.id }}" />
+        <input type="hidden" name="id" id="idEmpresa" value="{{ empresa.id }}" />
         <div class="row">
             <div class="col-12 col-sm-6">
                 <div class="form-group">
@@ -68,7 +68,7 @@
             <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input required type="email" class="form-control" id="email" name="email" value="{{ empresa.email }}">
+                    <input type="email" class="form-control" id="email" name="email" value="{{ empresa.email }}">
                 </div>
             </div>
             <div class="col-12 col-sm-6">
@@ -88,8 +88,13 @@
                 </div>
             </div>
             <div class="col-12 col-sm-12">
+                <div class="form-group">
+                    <span id="seleccionarCategoria"></span>
+                </div>
+            </div>
+            <div class="col-12 col-sm-12">
                 <div class="form-group text-center">
-                    <button type="submit" class="btn btn-primary">
+                    <button type="submit" id="aceptar" class="btn btn-primary">
                         Aceptar
                     </button>
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">

@@ -1,31 +1,34 @@
 $(document).ready(function(){
     $('#deleteButton').click(function(){
-        console.log('hemos pulsado eliminar');
         $.ajax({
             type: 'DELETE',
             dataType: 'json',
             success: function(respuesta){
-                console.log('Finalizo correctamente '+respuesta.redirect);
                 window.location = respuesta.redirect;
             }
         });
     });
 
-   /* $('#notificationForm').on('change',function(){
-        console.log('se modificaa'+$(this).serialize());
-        $.ajax({
-           type: 'POST',
-           dataType: 'json',
-           data: $(this).serialize(),
-           success: function(respuesta){
-               console.log('hemos terminado: '+respuesta.redirect);
-           }
-        });
-    });*/
+    $('#aceptar').click(function(e){
+       $('#seleccionarCategoria').html('');
+
+       //el seleccione categoria vale 8
+       if($('#categoria').val() == 8 ){
+           e.preventDefault();
+           $('#seleccionarCategoria').append('<p class="text-danger">Debes seleccionar una categoria</p>');
+       }
+
+       //el seleccione provincia vale 53
+       if($('#provincia').val() == 53 ){
+           e.preventDefault();
+           $('#seleccionarCategoria').append('<p class="text-danger">Debes seleccionar una provincia</p>');
+       }
+
+    });
 
     $('#provincia').on('change',function(){
-        console.log('SE ha mdoficiado la provincia '+this.value);
         var json = {
+            'idEmpresa':$('#idEmpresa').val(),
             'idProvincia':this.value
         }
         $.ajax({

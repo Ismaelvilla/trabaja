@@ -24,7 +24,7 @@ class CategoriaController extends Controller
         $entityManager = $this->getDoctrine()->getManager();
         $repositoryCategoria = $entityManager->getRepository('WebManagementBundle:Categoria');
         $categorias = $repositoryCategoria->findBy(
-            ['activo'=>1, 'usuario'=>$usuario->getId()],
+            ['usuario'=>$usuario->getId()],
             ['id'=>'ASC']
         );
 
@@ -33,6 +33,9 @@ class CategoriaController extends Controller
         ));
     }
 
+    /**
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
     public function addAction(){
         //Obtenemos el usuario
         $usuario = $this->getUser();
@@ -45,10 +48,12 @@ class CategoriaController extends Controller
         return $this->redirectToRoute('categorias_details', array(
             'id'=>$idCategoria
         ));
-
-
     }
 
+    /**
+     * @param Request $request
+     * @return Response
+     */
     public function detailsAction(Request $request){
         //conseguimos el id de atributo
         $idCategoria = $request->attributes->get('id');
@@ -58,7 +63,6 @@ class CategoriaController extends Controller
         $repositoryCategoria = $entityManager->getRepository('WebManagementBundle:Categoria');
         $categoria = $repositoryCategoria->find($idCategoria);
 
-
         return $this->render('WebManagementBundle:Categoria:details.html.twig', array(
             'categoria' => $categoria
         ));
@@ -66,6 +70,10 @@ class CategoriaController extends Controller
         return new Response('estamos en details');
     }
 
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function categoriaAjaxAction(Request $request){
         $csrfToken = $request->request->get('_csrf_token');
         $data = $request->request->all();
@@ -92,5 +100,4 @@ class CategoriaController extends Controller
         );
         return new JsonResponse($json);
     }
-
 }

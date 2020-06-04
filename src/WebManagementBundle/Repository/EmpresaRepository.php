@@ -18,7 +18,7 @@ class EmpresaRepository extends \Doctrine\ORM\EntityRepository
      * @param $entityManager
      * @return int
      */
-    public function add($entityManager, $categoria, $provincia, $municipio){
+    public function add($entityManager, $categoria, $provincia, $municipio, $usuario){
 
 
         $empresa = new Empresa();
@@ -30,7 +30,7 @@ class EmpresaRepository extends \Doctrine\ORM\EntityRepository
         $empresa->setActivo(false);
         $empresa->setPrioridad(1);
         $empresa->setFecha(new \DateTime);
-        $empresa->setUsuario('ismael');
+        $empresa->setUsuario($usuario);
 
         $entityManager->persist($empresa);
         $entityManager->flush();
