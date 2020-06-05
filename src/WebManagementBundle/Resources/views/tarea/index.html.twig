@@ -1,0 +1,43 @@
+{% extends "base.html.twig" %}
+{% block body %}
+    <div class="container border mt-5">
+        <div class="row border">
+            <div class="col-12 col-sm-6 border">
+                <button id="nuevaTarea" type="button" class="btn btn-outline-primary">Añadir nueva Tarea</button>
+            </div>
+            <div class="col-12 col-sm-6 border">
+                <button type="button" class="btn btn-outline-success">Guardar</button>
+                <button type="button" class="btn btn-outline-danger">Eliminar</button>
+                <button type="button" class="btn btn-outline-secondary">Cancelar</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-12">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-default">Default</span>
+                    </div>
+                    <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-12">
+                {% for tarea in tareas %}
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <input type="checkbox" aria-label="Checkbox for following text input">
+                            </div>
+                        </div>
+                        <input type="text" class="form-control" value="{{ tarea.tarea }}" aria-label="Text input with checkbox">
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('js/tarea.js') }}"></script>
+{% endblock %}
+

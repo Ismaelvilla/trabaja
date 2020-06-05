@@ -1,0 +1,9 @@
+tareas_index:
+  path:     '/'
+  methods:  [GET]
+  defaults: { _controller: WebManagementBundle:Tarea:index }
+
+categorias_ajax:
+  path:     '/nueva_ajax'
+  methods:  [GET]
+  defaults: { _controller: WebManagementBundle:Categoria:categoriaAjax }

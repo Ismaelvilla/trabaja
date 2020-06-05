@@ -16,5 +16,10 @@ categorias:
   resource: "@WebManagementBundle/Resources/config/routing_categorias.yml"
   prefix:   '/categorias/'
 
+#TAREAS
+tareas:
+  resource: "@WebManagementBundle/Resources/config/routing_tareas.yml"
+  prefix:   '/tareas/'
+
 
 
