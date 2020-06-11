@@ -3,7 +3,7 @@ tareas_index:
   methods:  [GET]
   defaults: { _controller: WebManagementBundle:Tarea:index }
 
-categorias_ajax:
-  path:     '/nueva_ajax'
+tareas_nueva_ajax:
+  path:     '/nueva-ajax'
   methods:  [GET]
-  defaults: { _controller: WebManagementBundle:Categoria:categoriaAjax }
+  defaults: { _controller: WebManagementBundle:Tarea:nuevaAjax }

@@ -21,6 +21,27 @@ class TareaController extends Controller
         $tareaRepository = $entity->getRepository('WebManagementBundle:Tarea');
         $tareas = $tareaRepository->findAll();
 
-        return $this->render('WebManagementBundle:Tarea:index.html.twig', array('tareas'=> $tareas));
+        return $this->render('WebManagementBundle:Tarea:index.html.twig', array('tareas' => $tareas));
+    }
+
+    public function nuevaAjaxAction(Request $request){
+        //Obtenemos el usuario
+        $usuario = $this->getUser();
+
+        $nombreTarea = $request->query->get('nombreTarea');
+
+        //cogemos el entity
+        $entity = $this->getDoctrine()->getManager();
+        $tareaRepository = $entity->getRepository('WebManagementBundle:Tarea');
+        $tareaRepository->newTask($entity, $nombreTarea, $usuario->getId());
+
+        //obtenemos todas las tareas para mostrar
+        $tareas = $tareaRepository->findAll();
+        $retorno = $this->render('WebManagementBundle:Tarea:gridTareas.html.twig', array('tareas' => $tareas));
+
+        $json = array(
+            'redirect'=>$retorno
+        );
+        return new JsonResponse($json);
     }
 }

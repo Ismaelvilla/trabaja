@@ -1,6 +1,7 @@
 <?php
 
 namespace WebManagementBundle\Repository;
+use WebManagementBundle\Entity\Tarea;
 
 /**
  * TareaRepository
@@ -10,4 +11,14 @@ namespace WebManagementBundle\Repository;
  */
 class TareaRepository extends \Doctrine\ORM\EntityRepository
 {
+  public function newTask($entity, $nombreTarea, $usuario){
+    $tarea = new Tarea();
+    $tarea->setTarea($nombreTarea);
+    $tarea->setFecha(new \DateTime);
+    $tarea->setActivo(true);
+    $tarea->setUsuario($usuario);
+
+    $entity->persist($tarea);
+    $entity->flush();
+  }
 }

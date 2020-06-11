@@ -1,0 +1,12 @@
+<div class="col-12 col-sm-12 border">
+    {% for tarea in tareas %}
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <input type="checkbox" aria-label="Checkbox for following text input">
+                </div>
+            </div>
+            <input type="text" class="form-control" value="{{ tarea.tarea }}" aria-label="Text input with checkbox">
+        </div>
+    {% endfor %}
+</div>
