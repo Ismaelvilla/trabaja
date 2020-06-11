@@ -7,3 +7,8 @@ tareas_nueva_ajax:
   path:     '/nueva-ajax'
   methods:  [GET]
   defaults: { _controller: WebManagementBundle:Tarea:nuevaAjax }
+
+tareas_eliminar_ajax:
+  path:     '/eliminar-ajax'
+  methods:  [GET]
+  defaults: { _controller: WebManagementBundle:Tarea:eliminarAjax }  

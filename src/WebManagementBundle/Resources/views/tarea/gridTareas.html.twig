@@ -3,7 +3,7 @@
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <div class="input-group-text">
-                    <input id="{{tarea.id}}" class="check" type="checkbox" aria-label="Checkbox for following text input">
+                    <input id="{{tarea.id}}" name="tareas[]" class="check" type="checkbox" aria-label="Checkbox for following text input">
                 </div>
             </div>
             <input type="text" class="form-control" value="{{ tarea.tarea }}" aria-label="Text input with checkbox">

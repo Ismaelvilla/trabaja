@@ -18,7 +18,7 @@
             </div>
             <div class="col-12 col-sm-6 border">
                 <button type="button" id="Guardar" class="btn btn-outline-success" disabled>Guardar</button>
-                <button type="button" id="Eliminar" class="btn btn-outline-danger" disabled>Eliminar</button>
+                <button type="button" id="Eliminar" class="btn btn-outline-danger" data-toggle="modal" data-target="#exampleModal" disabled>Eliminar</button>
                 <button type="button" id="Cancelar" class="btn btn-outline-secondary" disabled>Cancelar</button>
             </div>
         </div>
@@ -39,6 +39,7 @@
           {% include "@WebManagement/tarea/gridTareas.html.twig" %}
         </div>
     </div>
+    {% include "@WebManagement/tarea/modalEliminar.html.twig" %}
 {% endblock %}
 {% block javascripts %}
     <script src="{{ asset('js/tarea.js') }}"></script>

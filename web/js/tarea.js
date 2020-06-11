@@ -103,15 +103,29 @@ $(document).ready(function(){
     })
 
     //boton de Eliminar
-    $('#Eliminar').click(function(){
-      console.log('boton eliminar');
-      $.ajax({
-        method : 'GET',
-        url: 'eliminar-ajax',
-        success: function(respuesta){
-          console.log('llegamos al final');
+    $('#eliminarModal').click(function(){
+        var seleccionados = '';
+        //recorremos tods los checkbox para ver los que estan $seleccionados
+        //los metemos en un string separados por el simbolo |
+        $('.check').each(function(){
+            var id = this.id;
+            if( $('#'+id).prop('checked') ){
+                seleccionados += id +'|';
+            }
+        });
+        //creamos la variable json que es la que vamos a pasar por ajax
+        var json={
+            'seleccionados': seleccionados
         }
-      })
+        $.ajax({
+            method : 'GET',
+            url: 'eliminar-ajax',
+            data: json,
+            success: function(respuesta){
+                $('#gridTareas').html('');
+                $('#gridTareas').html(respuesta);
+            }
+        })
     });
 
 })

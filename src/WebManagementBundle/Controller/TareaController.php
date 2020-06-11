@@ -41,4 +41,25 @@ class TareaController extends Controller
 
         return $retorno;
     }
+
+    public function eliminarAjaxAction(Request $request){
+        //cogemos el entity y el repositorio Tareas
+        $entity = $this->getDoctrine()->getManager();
+        $tareaRepository = $entity->getRepository('WebManagementBundle:Tarea');
+        //Recogemos los id de las tareas para borrar, separadas por el simbolo |
+        $seleccionados = $request->query->get('seleccionados');
+        $eliminados = explode("|", $seleccionados);
+        //Recorremos las tareas para ir borrandolas
+        for($i=0; $i<count($eliminados); $i++){
+            if(strlen($eliminados[$i])!=0){
+                $tarea = $tareaRepository->find($eliminados[$i]);
+                $entity->remove($tarea);
+                $entity->flush();
+            }
+        }
+        //obtenemos todas las tareas para mostrar
+        $tareas = $tareaRepository->findAll();
+        $retorno = $this->render('WebManagementBundle:Tarea:gridTareas.html.twig', array('tareas' => $tareas));
+        return $retorno;
+    }
 }
