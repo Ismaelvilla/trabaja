@@ -24,7 +24,7 @@ $(document).ready(function(){
 
     $('#Cancelar').click(function(){
         //se Desactivan los 3 botones de cancelar, guardar, Eliminar
-        desactivarBotones();
+        DesactivarBotones();
 
         //desactivamos el texto textNuevaTarea
         $('#textNuevaTarea').attr("disabled", true);
@@ -36,15 +36,12 @@ $(document).ready(function(){
     });
 
     $('#Guardar').click(function(){
-        console.log('estamos en guardar '+ document.getElementById('textNuevaTarea').value);
         if(document.getElementById('textNuevaTarea').value){
           //se Desactivan los 3 botones de cancelar, guardar, Eliminar
-          desactivarBotones();
+          DesactivarBotones();
           //se activa el boton de NuevaTarea
           $('#nuevaTarea').attr('disabled', false);
-
-          //hacemos el insert en la tabla tareas
-          console.log('el valor de nombre es: '+$('#textNuevaTarea').val());
+          //hacemos el insert en la tabla tareas, mediante ajax
           var json = {
             'nombreTarea':$('#textNuevaTarea').val()
           }
@@ -53,7 +50,6 @@ $(document).ready(function(){
             data: json,
             url: 'nueva-ajax',
             success:function(respuesta){
-              console.log('retorna: '+respuesta);
               $('#gridTareas').html('');
               $('#gridTareas').html(respuesta);
               //se desactiva el texto y lo ponemos vacio
@@ -61,22 +57,61 @@ $(document).ready(function(){
               $('#textNuevaTarea').attr('disabled', true);
             }
           });
-
-          console.log('Hacemos lo que tenemos que hacer');
         }else{
-          console.log('Debe escribir un nombre a la tarea');
           $('#tareaVacia').html('<p class="alert alert-danger" role="alert">Debe escribir un nombre a la tarea</p>')
         }
-        //comprobamos que no llegue vacio el nombre de la tareas
-      /*  if($('#nombre').val){
-
-      }*/
     });
 
-    function desactivarBotones(){
+    function DesactivarBotones(){
       $('#Guardar').attr("disabled", true);
       $('#Cancelar').attr("disabled", true);
       $('#Eliminar').attr("disabled", true);
     }
+
+    function estadoBotones(estado){
+      //si es true se desactivan los botones, si es false se activan
+      $('#Guardar').attr("disabled", estado);
+      $('#Cancelar').attr("disabled", estado);
+      $('#Eliminar').attr("disabled", estado);
+    }
+
+    //cada vez que se haga click en un checkbox comprobamos que
+    // si hay alguno seleccionado los botones estaran activados y
+    //si no hay ninguno seleccionado los botones estaran desactivados
+    $('.check').click(function(){
+      var activaBotones = false;
+      //recorremos todos los checkbox
+      $(".check").each(function () {
+        //sacamos su atributo id
+        var id = this.id;
+        console.log('prueba '+this.id);
+        if( $('#'+id).prop('checked') ){
+          activaBotones = true;
+          console.log('tiene click');
+        }
+
+      });
+      // si activaBotones es false se desactivan los botones
+      if( activaBotones == false ){
+        estadoBotones(true);
+      }else{
+        //activamos los activaBotones
+        estadoBotones(false);
+      }
+      console.log('activa botones es: '+activaBotones);
+
+    })
+
+    //boton de Eliminar
+    $('#Eliminar').click(function(){
+      console.log('boton eliminar');
+      $.ajax({
+        method : 'GET',
+        url: 'eliminar-ajax',
+        success: function(respuesta){
+          console.log('llegamos al final');
+        }
+      })
+    });
 
 })
