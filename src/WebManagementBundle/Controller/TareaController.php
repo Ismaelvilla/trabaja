@@ -39,9 +39,6 @@ class TareaController extends Controller
         $tareas = $tareaRepository->findAll();
         $retorno = $this->render('WebManagementBundle:Tarea:gridTareas.html.twig', array('tareas' => $tareas));
 
-        $json = array(
-            'redirect'=>$retorno
-        );
-        return new JsonResponse($json);
+        return $retorno;
     }
 }

@@ -42,6 +42,7 @@ $(document).ready(function(){
           desactivarBotones();
           //se activa el boton de NuevaTarea
           $('#nuevaTarea').attr('disabled', false);
+
           //hacemos el insert en la tabla tareas
           console.log('el valor de nombre es: '+$('#textNuevaTarea').val());
           var json = {
@@ -52,9 +53,12 @@ $(document).ready(function(){
             data: json,
             url: 'nueva-ajax',
             success:function(respuesta){
-              console.log('retorna: '+respuesta.redirect);
+              console.log('retorna: '+respuesta);
               $('#gridTareas').html('');
-              $('#gridTareas').html(respuesta.redirect);
+              $('#gridTareas').html(respuesta);
+              //se desactiva el texto y lo ponemos vacio
+              $('#textNuevaTarea').val("");
+              $('#textNuevaTarea').attr('disabled', true);
             }
           });
 
