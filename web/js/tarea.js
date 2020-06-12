@@ -21,44 +21,65 @@ $(document).ready(function(){
            }
         });*/
     })
-
+    //*********************** INICIO ACCIONES CANCELAR*************** //
     $('#Cancelar').click(function(){
-        //se Desactivan los 3 botones de cancelar, guardar, Eliminar
-        DesactivarBotones();
-
-        //desactivamos el texto textNuevaTarea
-        $('#textNuevaTarea').attr("disabled", true);
-
-        //activamos el boton NuevaTarea
-        $('#nuevaTarea').attr("disabled", false);
-
-        console.log('Hacemos click en cancelar');
+        if($('#textNuevaTarea').val()){
+            console.log('tiene texto');
+            $('#modalCancelar').modal('show');
+        }else{
+            console.log('no tiene texto');
+            AccionesCancelar();
+        }
     });
 
+    $('#btnCancelarModalNo').click(function(){
+        console.log('estamos en no');
+        AccionesCancelar();
+    });
+
+    $('#btnCancelarModalSi').click(function(){
+        console.log('hemos pulsado si');
+        $('#Guardar').click();
+    });
+
+    //Acciones llevadas a cabo cuando se cancela y no se guardan los cambios
+    function AccionesCancelar(){
+        //se Desactivan los 3 botones de cancelar, guardar, Eliminar
+        DesactivarBotones();
+        //desactivamos el texto textNuevaTarea
+        $('#textNuevaTarea').attr("disabled", true);
+        //ponemos vacio el textNueva Tareas
+        $('#textNuevaTarea').val("");
+        //activamos el boton NuevaTarea
+        $('#nuevaTarea').attr("disabled", false);
+    }
+    //************** FIN ACCIONES CANCELAR ******************//
+
     $('#Guardar').click(function(){
+      console.log('llegamos a guardar');
         if(document.getElementById('textNuevaTarea').value){
-          //se Desactivan los 3 botones de cancelar, guardar, Eliminar
-          DesactivarBotones();
-          //se activa el boton de NuevaTarea
-          $('#nuevaTarea').attr('disabled', false);
-          //hacemos el insert en la tabla tareas, mediante ajax
-          var json = {
-            'nombreTarea':$('#textNuevaTarea').val()
-          }
-          $.ajax({
-            type: 'GET',
-            data: json,
-            url: 'nueva-ajax',
-            success:function(respuesta){
-              $('#gridTareas').html('');
-              $('#gridTareas').html(respuesta);
-              //se desactiva el texto y lo ponemos vacio
-              $('#textNuevaTarea').val("");
-              $('#textNuevaTarea').attr('disabled', true);
+            //se Desactivan los 3 botones de cancelar, guardar, Eliminar
+            DesactivarBotones();
+            //se activa el boton de NuevaTarea
+            $('#nuevaTarea').attr('disabled', false);
+            //hacemos el insert en la tabla tareas, mediante ajax
+            var json = {
+              'nombreTarea':$('#textNuevaTarea').val()
             }
-          });
+            $.ajax({
+              type: 'GET',
+              data: json,
+              url: 'nueva-ajax',
+              success:function(respuesta){
+                $('#gridTareas').html('');
+                $('#gridTareas').html(respuesta);
+                //se desactiva el texto y lo ponemos vacio
+                $('#textNuevaTarea').val("");
+                $('#textNuevaTarea').attr('disabled', true);
+              }
+            });
         }else{
-          $('#tareaVacia').html('<p class="alert alert-danger" role="alert">Debe escribir un nombre a la tarea</p>')
+            $('#tareaVacia').html('<p class="alert alert-danger" role="alert">Debe escribir un nombre a la tarea</p>')
         }
     });
 
