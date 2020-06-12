@@ -42,6 +42,24 @@ class TareaController extends Controller
         return $retorno;
     }
 
+    public function modificarAjaxAction(Request $request){
+        //Recogemos los datos, id y nombre modificado de la tarea
+        $id = $request->query->get('id');
+        $nombreTarea = $request->query->get('nombreTarea');
+        //cogemos el entity
+        $entity = $this->getDoctrine()->getManager();
+        $tareaRepository = $entity->getRepository('WebManagementBundle:Tarea');
+        //buscamos la tarea
+        $tarea = $tareaRepository->find($id);
+        $tarea->setTarea($nombreTarea);
+        $entity->flush();
+        //obtenemos todas las tareas para mostrar, para devolver la vista gridTareas
+        $tareas = $tareaRepository->findAll();
+        $retorno = $this->render('WebManagementBundle:Tarea:gridTareas.html.twig', array('tareas' => $tareas));
+
+        return $retorno;
+    }
+
     public function eliminarAjaxAction(Request $request){
         //cogemos el entity y el repositorio Tareas
         $entity = $this->getDoctrine()->getManager();

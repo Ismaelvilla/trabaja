@@ -8,7 +8,12 @@ tareas_nueva_ajax:
   methods:  [GET]
   defaults: { _controller: WebManagementBundle:Tarea:nuevaAjax }
 
+tareas_modificar_ajax:
+  path:     '/modificar-ajax'
+  methods:  [GET]
+  defaults: { _controller: WebManagementBundle:Tarea:modificarAjax }  
+
 tareas_eliminar_ajax:
   path:     '/eliminar-ajax'
   methods:  [GET]
-  defaults: { _controller: WebManagementBundle:Tarea:eliminarAjax }  
+  defaults: { _controller: WebManagementBundle:Tarea:eliminarAjax }
